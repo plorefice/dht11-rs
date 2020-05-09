@@ -3,6 +3,7 @@ authors = ["Pietro Lorefice <pietro.lorefice@gmail.com>"]
 categories = ["embedded", "hardware-support", "no-std"]
 description = "Platform-agnostic Rust driver for the DHT11 temperature and humidity sensor."
 edition = "2018"
+homepage = "https://github.com/plorefice/dht11-rs"
 keywords = ["embedded-hal-driver"]
 license = "MIT OR Apache-2.0"
 name = "dht11"
