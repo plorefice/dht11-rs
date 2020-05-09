@@ -5,6 +5,10 @@ description = "Platform-agnostic Rust driver for the DHT11 temperature and humid
 edition = "2018"
 homepage = "https://github.com/plorefice/dht11-rs"
 keywords = ["embedded-hal-driver"]
+include = [
+    "**/*.rs",
+    "Cargo.toml",
+]
 license = "MIT OR Apache-2.0"
 name = "dht11"
 readme = "README.md"
