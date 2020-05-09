@@ -1,5 +1,8 @@
 # dht11-rs
 
+[![crates.io badge](https://img.shields.io/crates/v/dht11.svg)](https://crates.io/crates/dht11)
+[![docs.rs badge](https://docs.rs/dht11/badge.svg)](https://docs.rs/dht11)
+
 Platform-agnostic Rust driver for the DHT11 temperature and humidity sensor,
 using [`embedded-hal`](https://github.com/rust-embedded/embedded-hal) traits.
 
