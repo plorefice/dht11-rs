@@ -31,7 +31,7 @@ pub struct Dht11<GPIO> {
 }
 
 /// Results of a reading performed by the DHT11.
-#[derive(Debug)]
+#[derive(Copy, Clone, Default, Debug)]
 pub struct Measurement {
     /// The measured temperature.
     pub temperature: f32,
