@@ -35,3 +35,12 @@ println!("{:?}", measurement);
 See the [examples](examples/) directory for an example on how to use this crate on an STM32F407 MCU.
 
 By default, semihosting is used to display the value of the readings, using OpenOCD or similar.
+
+## License
+
+Copyright © 2020 Pietro Lorefice
+
+Dual licensed under your choice of either of:
+
+- Apache License, Version 2.0, (LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0)
+- MIT license (LICENSE-MIT or http://opensource.org/licenses/MIT)
