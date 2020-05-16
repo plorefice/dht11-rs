@@ -10,6 +10,9 @@ use embedded_hal::{
     digital::v2::{InputPin, OutputPin},
 };
 
+#[cfg(feature = "dwt")]
+use cortex_m::peripheral::DWT;
+
 /// How long to wait for a pulse on the data line (in microseconds).
 const TIMEOUT_US: u16 = 1_000;
 
@@ -126,11 +129,14 @@ where
         Ok(high > low)
     }
 
-    fn wait_for_pulse<D>(&mut self, level: bool, delay: &mut D) -> Result<u16, Error<E>>
+    fn wait_for_pulse<D>(&mut self, level: bool, delay: &mut D) -> Result<u32, Error<E>>
     where
         D: DelayUs<u16> + DelayMs<u16>,
     {
         let mut count = 0;
+
+        #[cfg(feature = "dwt")]
+        let start = DWT::get_cycle_count();
 
         while self.read_line()? != level {
             count += 1;
@@ -140,7 +146,11 @@ where
             delay.delay_us(1);
         }
 
-        Ok(count)
+        #[cfg(feature = "dwt")]
+        return Ok(DWT::get_cycle_count().wrapping_sub(start));
+
+        #[cfg(not(feature = "dwt"))]
+        return Ok(u32::from(count));
     }
 
     fn set_input(&mut self) -> Result<(), Error<E>> {

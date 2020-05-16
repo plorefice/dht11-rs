@@ -17,6 +17,7 @@ version = "0.1.0"
 
 [dependencies]
 embedded-hal = { version = "0.2", features = ["unproven"] }
+cortex-m = { version = "0.6", optional = true }
 
 [dev-dependencies]
 cortex-m = "0.6"
@@ -27,6 +28,10 @@ panic-semihosting = "0.5"
 [dev-dependencies.stm32f4xx-hal]
 version = "0.8"
 features = ["rt", "stm32f407"]
+
+[features]
+default = []
+dwt = ["cortex-m"]
 
 [profile.release]
 lto = true
