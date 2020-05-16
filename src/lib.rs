@@ -67,10 +67,10 @@ pub struct Dht11<GPIO> {
 /// Results of a reading performed by the DHT11.
 #[derive(Copy, Clone, Default, Debug)]
 pub struct Measurement {
-    /// The measured temperature.
-    pub temperature: f32,
-    /// The measured humidity.
-    pub humidity: f32,
+    /// The measured temperature in centidegrees Celsius (hundredths of a degree).
+    pub temperature: i16,
+    /// The measured humidity in permyriads (hundredths of a percent).
+    pub humidity: u16,
 }
 
 impl<GPIO, E> Dht11<GPIO>
@@ -118,14 +118,14 @@ where
         }
 
         // Compute temperature
-        let mut temp = (data[2] & 0x7f) as f32 + data[3] as f32 * 0.1;
+        let mut temp = i16::from(data[2] & 0x7f) * 100 + i16::from(data[3]);
         if data[2] & 0x80 != 0 {
             temp = -temp;
         }
 
         Ok(Measurement {
             temperature: temp,
-            humidity: data[0] as f32 + data[1] as f32 * 0.1,
+            humidity: u16::from(data[0]) * 100 + u16::from(data[1]),
         })
     }
 
