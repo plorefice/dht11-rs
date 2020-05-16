@@ -1,5 +1,36 @@
 //! Platform-agnostic Rust driver for the DHT11 temperature and humidity sensor,
 //! using [`embedded-hal`](https://github.com/rust-embedded/embedded-hal) traits.
+//!
+//! # Examples
+//!
+//! An example for the STM32F407 microcontroller can be found in the source repository.
+//!
+//! ```
+//! // Open drain pin compatibible with HAL
+//! let pin = gpio.pe2.into_open_drain_output();
+//!
+//! // SysTick-based HAL `Delay` on Cortex-M
+//! let mut delay = Delay::new(cp.SYST, clocks);
+//!
+//! let mut dht11 = Dht11::new(pin);
+//!
+//! match dht11.perform_measurement(&mut delay) {
+//!     Ok(meas) => hprintln!("Temp: {} Hum: {}", meas.temperature, meas.humidity).unwrap(),
+//!     Err(e) => hprintln!("Error: {:?}", e).unwrap(),
+//! };
+//! ```
+//!
+//! # Optional features
+//!
+//! ## `dwt`
+//!
+//! In applications with multiple, frequent interrupts being handled by the system, the traditional
+//! delay-based approach achievable using only traits provided by `embedded-hal` may lead to
+//! incorrect bit readings, and thus timeout and CRC errors.
+//!
+//! Enabling this feature will cause the crate to use the DWT counter available on some ARM Cortex-M
+//! families to more accurately measure bit times, thus greatly reducing inaccuracies introduced
+//! by external interrupts.
 
 #![deny(unsafe_code)]
 #![deny(missing_docs)]
