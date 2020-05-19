@@ -16,7 +16,7 @@ Include library as a dependency in your Cargo.toml
 
 ```toml
 [dependencies]
-dht11 = "0.1.0"
+dht11 = "0.3.1"
 ```
 
 ```rust
